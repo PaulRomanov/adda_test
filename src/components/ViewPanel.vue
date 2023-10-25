@@ -38,17 +38,22 @@ export default {
   props: { lists: Array },
   computed: {
     filteredLists() {
-      return this.lists.map((list) => ({
-        ...list,
-        items: list.items.filter((item) => item.selected),
-        showShuffleButton: true,
-        shuffledCubes: [],
-        originalItems: list.items.map((item) => ({ ...item })), // копия оригинальных элементов
-      }));
+      return this.lists.map((list) => {
+        const selectedItems = list.items.filter((item) => item.selected);
+        return {
+          ...list,
+          items: selectedItems,
+          showShuffleButton: true,
+          shuffledCubes: [],
+          originalItems: this.copyOriginalItems(selectedItems), // копия оригинальных элементов. Копируем только выбранные элементы
+        };
+      });
     },
   },
-
   methods: {
+    copyOriginalItems(selectedItems) {
+      return selectedItems.map((item) => ({ ...item }));
+    },
     btnAction(list) {
       if (list.showShuffleButton) {
         list.shuffledCubes = this.shuffleCubes(list.items);
