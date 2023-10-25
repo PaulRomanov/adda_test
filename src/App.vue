@@ -5,9 +5,6 @@
   <div class="wrapper_view-panel">
       <view-panel :lists="lists"></view-panel>
     </div>
-  <div>
-    {{ lists[0].items }}
-  </div>
 </template>
 
 <script>
@@ -28,7 +25,6 @@ export default {
           id: 1,
           name: "List 1",
           showItems: false,
-          isParent: true,
           items: [
             { id: 1, selected: false, quantity: 1, color: "#FF0000" },
             { id: 2, selected: false, quantity: 2, color: "#32CD32" },
@@ -40,7 +36,42 @@ export default {
           id: 2,
           name: "List 2",
           showItems: false,
-          isParent: true,
+          items: [
+            { id: 1, selected: false, quantity: 1, color: "#FF0000" },
+            { id: 2, selected: false, quantity: 2, color: "#32CD32" },
+            { id: 3, selected: false, quantity: 3, color: "#0000CD" },
+            { id: 4, selected: false, quantity: 1, color: "#FFD700" },
+            { id: 5, selected: false, quantity: 1, color: "#FF7F50" },
+          ],
+        },
+        {
+          id: 3,
+          name: "List 3",
+          showItems: false,
+          items: [
+            { id: 1, selected: false, quantity: 1, color: "#FF0000" },
+            { id: 2, selected: false, quantity: 2, color: "#32CD32" },
+            { id: 3, selected: false, quantity: 3, color: "#0000CD" },
+            { id: 4, selected: false, quantity: 1, color: "#FFD700" },
+            { id: 5, selected: false, quantity: 1, color: "#FF7F50" },
+          ],
+        },
+        {
+          id: 4,
+          name: "List 4",
+          showItems: false,
+          items: [
+            { id: 1, selected: false, quantity: 1, color: "#FF0000" },
+            { id: 2, selected: false, quantity: 2, color: "#32CD32" },
+            { id: 3, selected: false, quantity: 3, color: "#0000CD" },
+            { id: 4, selected: false, quantity: 1, color: "#FFD700" },
+            { id: 5, selected: false, quantity: 1, color: "#FF7F50" },
+          ],
+        },
+        {
+          id: 5,
+          name: "List 5",
+          showItems: false,
           items: [
             { id: 1, selected: false, quantity: 1, color: "#FF0000" },
             { id: 2, selected: false, quantity: 2, color: "#32CD32" },
