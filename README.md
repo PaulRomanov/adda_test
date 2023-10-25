@@ -25,4 +25,4 @@
 - Читабельность и наличие элементарной архитектуры;  
 - Верстка должна быть выполнена без использования UI библиотек.
 
-  ![image](https://github.com/PaulRomanov/adda_test/assets/60575337/44d12b79-e3d5-4faf-8dda-78354f53a6f5)  
+![image](https://github.com/PaulRomanov/adda_test/assets/60575337/20a933c2-5646-4c08-a4bc-d899893146a0)
