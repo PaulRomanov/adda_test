@@ -1,10 +1,12 @@
 <template>
-  <div class="wrapper_lists">
-    <lists-panel :lists="lists"></lists-panel>
-  </div>
-  <div class="wrapper_view-panel">
+  <div id="app">
+    <div class="wrapper_lists">
+      <lists-panel :lists="lists"></lists-panel>
+    </div>
+    <div class="wrapper_view-panel">
       <view-panel :lists="lists"></view-panel>
     </div>
+  </div>
 </template>
 
 <script>
@@ -98,6 +100,7 @@ export default {
   margin-left: 10%;
 }
 .wrapper_view-panel {
+  width: 40%;
   display: flex;
   flex-direction: column;
   margin: 0 0 0 20px;
