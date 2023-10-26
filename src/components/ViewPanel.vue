@@ -13,6 +13,7 @@
               :key="cube"
               class="color-cube"
               :style="{ backgroundColor: item.color }"
+              @click="removeCube(list, item)"
             ></div>
           </div>
         </div>
@@ -30,6 +31,8 @@
 </template>
 
 <script>
+import cloneDeep from "lodash/cloneDeep";
+
 export default {
   name: "ViewPanel",
   data() {
@@ -52,7 +55,7 @@ export default {
   },
   methods: {
     copyOriginalItems(selectedItems) {
-      return selectedItems.map((item) => ({ ...item }));
+      return cloneDeep(selectedItems);
     },
     btnAction(list) {
       if (list.showShuffleButton) {
@@ -68,15 +71,18 @@ export default {
 
     shuffleCubes(array) {
       let newArray = [];
-      //создаем массив объектов, где каждый объект - это кубик определенного цвета
+      //создаем массив объектов, только для элементов с количеством больше нуля
+      // где каждый объект - это кубик определенного цвета
       for (let i = 0; i < array.length; i++) {
-        newArray = newArray.concat(
-          Array(array[i].quantity).fill({
-            color: array[i].color,
-          })
-        );
+        if (array[i].quantity > 0) {
+          newArray = newArray.concat(
+            Array(array[i].quantity).fill({
+              color: array[i].color,
+            })
+          );
+        }
       }
-      //перемешиваем массив объектов
+      // Перемешиваем массив объектов
       for (let i = newArray.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
@@ -86,11 +92,32 @@ export default {
     },
 
     restoreOriginalItems(list) {
-      list.items = list.originalItems.map((item) => ({ ...item }));
+      const originalList = this.lists.find((l) => l.id === list.id);
+      if (originalList) {
+        // Заменяем только элементы с количеством больше нуля
+        for (let i = 0; i < originalList.items.length; i++) {
+          if (originalList.items[i].quantity === 0) {
+            originalList.items.splice(i, 1);
+            i--;
+          }
+        }
+      }
       this.$forceUpdate();
     },
     saveOriginalItems(list) {
       this.originalItems[list.id] = list.items.map((item) => ({ ...item }));
+    },
+    removeCube(list, item) {
+      if (item.quantity > 0) {
+        item.quantity--;
+        if (item.quantity === 0) {
+          const itemIndex = list.items.indexOf(item);
+          if (itemIndex > -1) {
+            list.items.splice(itemIndex, 1);
+          }
+          item.selected = false;
+        }
+      }
     },
   },
 };
